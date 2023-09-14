@@ -36,6 +36,6 @@ jobs:
           script: |
             cd /var/tmp/amazon-qoo10-tool
             npm install
-            npm build
+            npm run build
             npm i serve
             serve -p 3000 build/
