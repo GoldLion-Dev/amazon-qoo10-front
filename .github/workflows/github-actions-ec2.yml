@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/YOUR/TARGET/DIR
+            cd ~/home/ubuntu
             yarn/npm install
             yarn/npm build
             yarn/npm i serve
