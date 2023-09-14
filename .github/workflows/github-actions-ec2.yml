@@ -34,6 +34,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /var/tmp/amazon-qoo10-front
+            cd /var/www/html/amazon-qoo10-front
             npm install
             npm run build
