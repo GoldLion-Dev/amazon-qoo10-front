@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /var/tmp/amazon-qoo10-tool
-            yarn/npm install
-            yarn/npm build
-            yarn/npm i serve
+            npm install
+            npm build
+            npm i serve
             serve -p 3000 build/
