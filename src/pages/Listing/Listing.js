@@ -18,7 +18,6 @@ const Listing = () => {
     "操作",
   ];
 
-  //     id: "1",
   //     dateTime: "1 Year",
   //     status: "waiting",
   //     importName: "A",

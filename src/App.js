@@ -10,14 +10,10 @@ import ReListing from "./pages/ReListing/ReListing";
 import Qoo10 from "./pages/Qoo10/Qoo10";
 import ImageEdit from "./pages/ImageEdit/ImageEdit";
 import { useSelector } from "react-redux";
+import { getUserId } from "./utils/getUserId";
+
 function App() {
-  const getToken = () => {
-    const tokenString = localStorage.getItem("token");
-    const userToken = JSON.parse(tokenString);
-    console.log(userToken);
-    return userToken?.token;
-  };
-  if (!getToken) {
+  if (!getUserId()) {
     return <Login />;
   } else {
     return (
