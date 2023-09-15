@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const methods = useForm();
-  const baseURL = process.env.REACT_APP_API_URL | +"login";
+  const baseURL = process.env.REACT_APP_API_URL + "login";
   const dispatch = useDispatch();
 
   const onSubmit = methods.handleSubmit((data) => {
