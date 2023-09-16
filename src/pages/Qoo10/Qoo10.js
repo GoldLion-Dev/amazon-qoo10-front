@@ -28,13 +28,15 @@ const Qoo10 = () => {
       })
       .then((response) => {
         if (response["data"]["status"] == 200) {
-          toast.success("success", { autoClose: 6000 });
+          toast.success("店舗情報が登録されました。", { autoClose: 6000 });
         }
         if (response["data"]["status"] == 300) {
-          toast.warning("warning", { autoClose: 6000 });
+          toast.warning("店舗情報の登録に問題があります。", {
+            autoClose: 6000,
+          });
         }
         if (response["data"]["status"] == 500) {
-          toast.error("error", { autoClose: 6000 });
+          toast.error("店舗情報の登録に問題があります。", { autoClose: 6000 });
         }
       });
   });
