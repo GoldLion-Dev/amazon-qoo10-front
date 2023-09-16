@@ -11,16 +11,19 @@ import Qoo10 from "./pages/Qoo10/Qoo10";
 import ImageEdit from "./pages/ImageEdit/ImageEdit";
 import { useSelector } from "react-redux";
 import { getUserId } from "./utils/getUserId";
+import { useEffect, useState } from "react";
 
 function App() {
-  if (!getUserId()) {
+  const [loginFlag, setLoginFlag] = useState(false);
+  const islogin = useSelector((state) => state.login.loginToken);
+  const user_id = getUserId();
+
+  if (islogin == "" && user_id == undefined) {
     return <Login />;
   } else {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Listing />} />
             <Route path="/listing" element={<Listing />} />

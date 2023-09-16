@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPagnation } from "../../pages/Listing/listingSlice";
 import ReListingModal from "../ReListing/ReListingModal";
 import Loader from "./Loader";
 
 const ReListTable = ({ tableHeaders, tableData, isLoading }) => {
   const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.listing.activePage);
+  const countPerPage = useSelector((state) => state.listing.countPerPage);
   const handleResetPagnation = () => {
     dispatch(resetPagnation());
   };
@@ -59,7 +61,7 @@ const ReListTable = ({ tableHeaders, tableData, isLoading }) => {
                            border-b border-l border-[#E8E8E8]
                            "
                           >
-                            {i + 1}
+                            {countPerPage * (currentPage - 1) + i + 1}
                           </td>
                           <td
                             class="

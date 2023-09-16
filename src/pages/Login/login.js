@@ -20,7 +20,7 @@ const Login = () => {
         toast.error(response["data"]["message"], { autoClose: 6000 });
         if (response["data"]["status"] == 200) {
           toast.success("ユーザーのログインに成功しました。");
-          dispatch(changeLoginStatus("true"));
+          dispatch(changeLoginStatus(Date.now()));
           localStorage.setItem(
             "token",
             JSON.stringify(response["data"]["user"])
@@ -74,31 +74,15 @@ const Login = () => {
                   class="h-12 w-full rounded-3xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800"
                   onClick={onSubmit}
                 >
-                  Login
+                  ログイン
                 </button>
 
                 <button class="h-12 w-full rounded-3xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800">
-                  Register
+                  登録
                 </button>
                 <ToastContainer />
-                <a
-                  href="#"
-                  class="inline-flex !w-auto justify-center font-medium text-white"
-                >
-                  Forgot password?
-                </a>
               </form>
             </FormProvider>
-
-            <p class="gap-2 text-center text-white">
-              Don't have an account?
-              <a
-                href="#"
-                class="font-semibold text-blue-900 hover:text-blue-800"
-              >
-                Sign up
-              </a>
-            </p>
           </div>
         </div>
       </div>

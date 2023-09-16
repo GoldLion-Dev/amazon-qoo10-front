@@ -142,7 +142,7 @@ const TableFooter = ({ rowCount }) => {
           for="countries"
           className=" w-1/3  mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          List Per Page:
+          アイテム数:
         </label>
         <select
           id="countries"

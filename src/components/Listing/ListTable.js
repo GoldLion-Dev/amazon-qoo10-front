@@ -11,6 +11,8 @@ import { getUserId } from "../../utils/getUserId";
 const ListTable = ({ tableHeaders, tableData, isLoading }) => {
   const listURL = process.env.REACT_APP_API_URL + "listProduct";
   const isProcessing = useSelector((state) => state.listing.isProcessing);
+  const currentPage = useSelector((state) => state.listing.activePage);
+  const countPerPage = useSelector((state) => state.listing.countPerPage);
   const dispatch = useDispatch();
   const handleResetPagnation = () => {
     dispatch(resetPagnation());
@@ -25,6 +27,28 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
         if (response["data"]["status"] == "success") {
         }
         dispatch(setProcessing(false));
+      });
+  };
+
+  const handleDeleteList = (event) => {
+    const list_id = event.target.id;
+    const api_url = process.env.REACT_APP_API_URL + "deleteList";
+    dispatch(setProcessing(true));
+    axios
+      .post(api_url, {
+        list_id: list_id,
+      })
+      .then((response) => {
+        if (response["data"]["status"] == "200") {
+          dispatch(setProcessing(false));
+        }
+        if (response["data"]["status"] == "500") {
+          dispatch(setProcessing(false));
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
   const formatter = new Intl.DateTimeFormat("ja-GB", {
@@ -87,7 +111,7 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
                            border-b border-l border-[#E8E8E8]
                            "
                           >
-                            {i + 1}
+                            {countPerPage * (currentPage - 1) + i + 1}
                           </td>
                           <td
                             class="
@@ -113,8 +137,8 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
                            border-b border-[#E8E8E8]
                            "
                           >
-                            {item.list_status == 0 && <span>waiting</span>}
-                            {item.list_status == 1 && <span>listed</span>}
+                            {item.list_status == 0 && <span>待機中</span>}
+                            {item.list_status == 1 && <span>出品済み</span>}
                           </td>
                           <td
                             class="
@@ -167,39 +191,73 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
                            "
                           >
                             {item.list_status == 0 && (
-                              <button
-                                id={item.id}
-                                class="
+                              <div className="flex space-x-1">
+                                <button
+                                  id={item.id}
+                                  class="
                               border border-primary
                               py-2
-                              px-6
+                              px-3
                               text-primary
                               inline-block
                               rounded
                               hover:bg-primary hover:text-white
                               "
-                                onClick={handleListButton}
-                              >
-                                List
-                              </button>
+                                  onClick={handleListButton}
+                                >
+                                  出品
+                                </button>
+                                <button
+                                  id={item.id}
+                                  class="
+                            border border-primary
+                            py-2
+                            px-3
+                            text-primary
+                            inline-block
+                            rounded
+                            hover:bg-primary hover:text-white
+                            "
+                                  onClick={handleDeleteList}
+                                >
+                                  削除
+                                </button>
+                              </div>
                             )}
                             {item.list_status == 1 && (
-                              <Link
-                                to={`/listingDetailPage/${item.id}`}
-                                href="javascript:void(0)"
-                                class="
+                              <div className="flex  space-x-1">
+                                <Link
+                                  to={`/listingDetailPage/${item.id}`}
+                                  href="javascript:void(0)"
+                                  class="
                               border border-primary
                               py-2
-                              px-6
+                              px-3
                               text-primary
                               inline-block
                               rounded
                               hover:bg-primary hover:text-white
                               "
-                                onClick={handleResetPagnation}
-                              >
-                                Detail
-                              </Link>
+                                  onClick={handleResetPagnation}
+                                >
+                                  詳細
+                                </Link>
+                                <button
+                                  id={item.id}
+                                  class="
+                        border border-primary
+                        py-2
+                        px-3
+                        text-primary
+                        inline-block
+                        rounded
+                        hover:bg-primary hover:text-white
+                        "
+                                  onClick={handleDeleteList}
+                                >
+                                  削除
+                                </button>
+                              </div>
                             )}
                           </td>
                         </tr>

@@ -1,11 +1,12 @@
 import ReListTable from "../../components/Listing/ReListTable";
 import TableFooter from "../../components/Listing/TableFooter";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getUserId } from "../../utils/getUserId";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { changeCountPerPage } from "../Listing/listingSlice";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
 let filterTableData = [];
 const api_root = process.env.REACT_APP_API_URL;
@@ -16,7 +17,7 @@ const ReListing = () => {
     "タイトル",
     "価格",
     "在庫",
-    "Qoo10 Code",
+    "Qoo10 製品コード",
     "操作",
   ];
 
@@ -27,6 +28,7 @@ const ReListing = () => {
   const isSuccess = useSelector((state) => state.relisting.isSuccess);
   const status = useSelector((state) => state.relisting.status);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const dispatch = useDispatch();
   let rowCount;
   let displayTableData = [];
 
@@ -34,6 +36,7 @@ const ReListing = () => {
   let itemArray = [];
   useEffect(() => {
     setLoading(true);
+    dispatch(changeCountPerPage(15));
     axios
       .post(baseURL, {
         user_id: getUserId(),

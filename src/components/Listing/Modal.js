@@ -24,20 +24,25 @@ export default function Modal({ handleUpload }) {
     formData.append("csvFile", file);
     formData.append("filename", fileName);
     formData.append("userId", user_id);
-    axios.post(baseURL, formData).then((response) => {
-      if (response["data"]["status"] == "500") {
-        toast.error("csvファイル種類を確認してください", {
-          autoClose: 6000,
-        });
-      }
-      if (response["data"]["status"] == "200") {
-        toast.success("csvファイルが正常にアップロードされました", {
-          autoClose: 6000,
-        });
-        handleUpload(response["data"]["id"]);
-        setShowModal(false);
-      }
-    });
+    axios
+      .post(baseURL, formData)
+      .then((response) => {
+        if (response["data"]["status"] == "500") {
+          toast.error("csvファイル種類を確認してください", {
+            autoClose: 6000,
+          });
+        }
+        if (response["data"]["status"] == "200") {
+          toast.success("csvファイルが正常にアップロードされました", {
+            autoClose: 6000,
+          });
+          handleUpload(response["data"]["id"]);
+          setShowModal(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -47,7 +52,7 @@ export default function Modal({ handleUpload }) {
         onClick={() => setShowModal(true)}
       >
         <img src={upload} className="float-left" width="20" height="20" />
-        <span>CSV Upload</span>
+        <span>CSV アップロード</span>
       </button>
       {showModal ? (
         <>

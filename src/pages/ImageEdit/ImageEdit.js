@@ -12,14 +12,6 @@ const ImageEdit = () => {
     setFileName(filename);
     setFile(event.target.files[0]);
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("imagefile", file);
-
-  //   axios.post(baseURL, formData).then((response) => {
-  //     console.log(response);
-  //   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,12 +92,6 @@ const ImageEdit = () => {
                 type="submit"
               >
                 画像編集
-              </button>
-              <button
-                class="w-[20%] space-x-2 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none   shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-                type="button"
-              >
-                出品画像 ダウンロード
               </button>
             </div>
           </div>

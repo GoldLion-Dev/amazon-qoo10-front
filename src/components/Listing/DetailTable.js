@@ -8,6 +8,9 @@ import {
 } from "../../pages/Listing/listingSlice";
 
 const DetailTable = ({ tableHeaders, tableData, isLoading }) => {
+  const currentPage = useSelector((state) => state.listing.activePage);
+  const countPerPage = useSelector((state) => state.listing.countPerPage);
+
   return (
     <section class=" clear-right bg-white py-1 lg:py-[10px]">
       <div class="container">
@@ -58,7 +61,7 @@ const DetailTable = ({ tableHeaders, tableData, isLoading }) => {
                            border-b border-l border-[#E8E8E8]
                            "
                           >
-                            {i + 1}
+                            {countPerPage * (currentPage - 1) + i + 1}
                           </td>
                           <td
                             class="
@@ -108,8 +111,8 @@ const DetailTable = ({ tableHeaders, tableData, isLoading }) => {
                            border-b border-[#E8E8E8]
                            "
                           >
-                            {item.list_status == 0 && <span>waiting</span>}
-                            {item.list_status == 1 && <span>listed</span>}
+                            {item.list_status == 0 && <span>待機中</span>}
+                            {item.list_status == 1 && <span>出品済み</span>}
                           </td>
                         </tr>
                       );
