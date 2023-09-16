@@ -7,6 +7,8 @@ import {
 } from "../../pages/Listing/listingSlice";
 import Loader from "./Loader";
 import { getUserId } from "../../utils/getUserId";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ListTable = ({ tableHeaders, tableData, isLoading }) => {
   const listURL = process.env.REACT_APP_API_URL + "listProduct";
@@ -24,9 +26,18 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
       .post(listURL, { id: event.target.id, userId: getUserId() })
       .then((response) => {
         console.log(response["data"]["status"]);
-        if (response["data"]["status"] == "success") {
+        if (response["data"]["status"] == "200") {
+          dispatch(setProcessing(false));
+          toast.success(response["data"]["message"]);
         }
-        dispatch(setProcessing(false));
+        if (response["data"]["status"] == "300") {
+          dispatch(setProcessing(false));
+          toast.warn(response["data"]["message"]);
+        }
+        if (response["data"]["status"] == "500") {
+          dispatch(setProcessing(false));
+          toast.error(response["data"]["message"]);
+        }
       });
   };
 
@@ -270,6 +281,7 @@ const ListTable = ({ tableHeaders, tableData, isLoading }) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </section>
   );
 };
