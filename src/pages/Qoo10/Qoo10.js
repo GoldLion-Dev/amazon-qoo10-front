@@ -49,14 +49,14 @@ const Qoo10 = () => {
         if (response["data"]["status"] == 200) {
           const result = JSON.parse(response["data"]["key"]);
           if (result["ResultObject"] != null) {
-            toast.success("success");
+            toast.success("APIキーが正常に生成されました。");
             setApiKey(result["ResultObject"]);
           } else {
-            toast.error("store id and password, api token wrong");
+            toast.error("ストアID、パスワード、APIトークンをご確認ください");
           }
         }
         if (response["data"]["status"] == 300) {
-          toast.error("system error");
+          toast.error("ストアID、パスワード、APIトークンをご確認ください");
         }
       });
   });
@@ -104,15 +104,6 @@ const Qoo10 = () => {
                   validFlag={true}
                   value=""
                 />
-
-                {/* <Input
-                  label="Qoo10 Auth Key"
-                  type="text"
-                  id="apiKey"
-                  name="apiKey"
-                  placeholder="Qoo10 Auth Key"
-                  validFlag={false}
-                /> */}
 
                 <input
                   id="apiKey"
