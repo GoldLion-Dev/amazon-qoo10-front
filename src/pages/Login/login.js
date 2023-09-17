@@ -81,7 +81,11 @@ const Login = () => {
                   登録
                 </button> */}
                 <button class="h-12 w-full rounded-3xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800">
-                  <a href="http://16.16.188.222/sign-up" target="_blank">
+                  <a
+                    className="w-full"
+                    href="http://16.16.188.222/sign-up"
+                    target="_blank"
+                  >
                     登録
                   </a>
                 </button>

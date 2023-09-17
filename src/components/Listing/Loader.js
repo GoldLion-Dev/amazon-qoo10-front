@@ -7,10 +7,7 @@ const Loader = () => {
         <div className="h-4 w-4 rounded-full bg-blue-500 animate-bounce"></div>
       </div>
       <div className="mt-4 text-center">
-        <p className="text-lg font-semibold text-gray-700">
-          少しお待ちください。
-        </p>
-        {/* <p className="text-sm text-gray-500">少しお待ちください。</p> */}
+        <p className="text-lg text-gray-500">少しお待ちください。</p>
       </div>
     </div>
   );
