@@ -17,7 +17,8 @@ function App() {
   const [loginFlag, setLoginFlag] = useState(false);
   const islogin = useSelector((state) => state.login.loginToken);
   const user_id = getUserId();
-
+  console.log(islogin);
+  console.log(user_id);
   if (islogin == "" && user_id == undefined) {
     return <Login />;
   } else {
