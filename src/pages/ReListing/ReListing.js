@@ -58,7 +58,10 @@ const ReListing = () => {
 
   useEffect(() => {
     if (status == "200") {
-      toast.success("success");
+      toast.success("再出品は成功しました。");
+    }
+    if (status == "500") {
+      toast.error("再出品は失敗しました。");
     }
   }, [isSuccess]);
 
